@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Defina uma nova senha para sua conta Beauty Hub.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Nova senha — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page" data-page="new-password">
+  <main class="auth-shell">
+    <section class="auth-form-panel" aria-labelledby="new-password-title">
+      <header class="auth-header">
+        <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>por The Gamers Tech</small></span></a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button>
+      </header>
+      <div class="auth-form-wrap auth-form-wrap-compact">
+        <p class="eyebrow">Conta protegida</p>
+        <h1 id="new-password-title">Crie sua nova senha.</h1>
+        <p class="auth-lead">Use pelo menos oito caracteres e evite repetir uma senha utilizada em outro serviço.</p>
+        <form class="auth-form" data-auth-form>
+          <label class="field"><span>Nova senha</span><span class="password-field"><input type="password" name="password" autocomplete="new-password" minlength="8" placeholder="Mínimo de 8 caracteres" required><button type="button" data-password-toggle aria-label="Mostrar senha">Mostrar</button></span></label>
+          <label class="field"><span>Confirmar nova senha</span><span class="password-field"><input type="password" name="passwordConfirm" autocomplete="new-password" minlength="8" placeholder="Repita a nova senha" required><button type="button" data-password-toggle aria-label="Mostrar senha">Mostrar</button></span></label>
+          <button class="button button-primary button-block" type="submit">Atualizar senha</button>
+          <p class="form-feedback" data-form-feedback role="status" aria-live="polite"></p>
+        </form>
+        <p class="auth-switch"><a href="login.html">Voltar para entrar</a></p>
+      </div>
+    </section>
+    <aside class="auth-visual-panel" aria-label="Segurança da conta Beauty Hub">
+      <img src="assets/images/beauty-auth-panel.webp" alt="Ambiente de beleza acolhedor e bem iluminado">
+      <div class="auth-visual-overlay"></div>
+      <div class="auth-visual-copy"><span class="auth-visual-badge">Segurança em cada acesso</span><blockquote>“Seu cuidado começa com confiança.”</blockquote><p>Uma nova senha devolve o acesso sem expor seus dados ou seu histórico.</p></div>
+    </aside>
+  </main>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
