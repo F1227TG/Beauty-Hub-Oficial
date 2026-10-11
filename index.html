@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Beauty Hub — encontre salões e profissionais de beleza, compare serviços e agende seu momento de cuidado.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Beauty Hub — beleza perto de você</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('beauty-hub-theme') || 'light';
+    } catch (_) {}
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial">
+      <span class="brand-symbol" aria-hidden="true">
+        <img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt="">
+        <img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt="">
+      </span>
+      <span class="brand-name">Beauty <strong>Hub</strong><small>por The Gamers Tech</small></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="is-active" href="index.html">Início</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="para-profissionais.html">Para profissionais</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema">
+        <span data-theme-icon aria-hidden="true">☾</span>
+      </button>
+      <a class="button button-ghost button-small" href="login.html">Entrar</a>
+      <a class="button button-primary button-small" href="cadastro.html">Criar conta</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true">✦</span> Beleza perto de você</p>
+        <h1 id="hero-title">Seu momento de cuidado <em>começa aqui.</em></h1>
+        <p class="hero-lead">Encontre salões e profissionais de beleza, conheça trabalhos reais e agende no horário que combina com a sua rotina.</p>
+
+        <form class="discovery-search" action="explorar.html" method="get" aria-label="Buscar serviços de beleza">
+          <label>
+            <span>O que você procura?</span>
+            <input name="query" type="search" placeholder="Cabelo, unhas, maquiagem...">
+          </label>
+          <span class="search-divider" aria-hidden="true"></span>
+          <label>
+            <span>Onde?</span>
+            <input name="location" type="search" placeholder="Bairro ou cidade">
+          </label>
+          <button class="button button-primary" type="submit">Encontrar horários</button>
+        </form>
+
+        <div class="hero-proof" aria-label="Benefícios da Beauty Hub">
+          <span><i aria-hidden="true">✓</i> Avaliações verificadas</span>
+          <span><i aria-hidden="true">✓</i> Agenda sem complicação</span>
+          <span><i aria-hidden="true">✓</i> Profissionais perto de você</span>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-label="Prévia da experiência Beauty Hub">
+        <div class="hero-photo-placeholder" aria-hidden="true">
+          <span class="photo-glow photo-glow-one"></span>
+          <span class="photo-glow photo-glow-two"></span>
+          <div class="mirror-shape"><span class="mirror-highlight"></span></div>
+          <div class="salon-console"></div>
+        </div>
+
+        <article class="floating-card floating-card-main">
+          <div class="floating-card-top">
+            <span class="mini-brand">B</span>
+            <span><strong>Studio Aurora</strong><small>Beleza & bem-estar</small></span>
+            <span class="verified">Verificado</span>
+          </div>
+          <p>Seu próximo cuidado, do seu jeito.</p>
+          <div class="appointment-row">
+            <span><small>Próximo horário</small><strong>Hoje, 16:30</strong></span>
+            <button type="button">Agendar</button>
+          </div>
+        </article>
+
+        <div class="floating-chip floating-chip-rating"><strong>4,9</strong><span>★ 128 avaliações</span></div>
+        <div class="floating-chip floating-chip-category"><span aria-hidden="true">✦</span><strong>Manicure</strong><small>12 espaços disponíveis</small></div>
+      </div>
+    </section>
+
+    <section class="category-strip" aria-labelledby="categories-title">
+      <div class="section-intro">
+        <div>
+          <p class="eyebrow">Escolha o seu cuidado</p>
+          <h2 id="categories-title">Tudo o que faz você se sentir bem.</h2>
+        </div>
+        <a class="text-link" href="explorar.html">Ver todas as categorias <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="category-grid">
+        <a class="category-card category-hair" href="explorar.html?categoria=cabelo"><span class="category-number">01</span><span><strong>Cabelo</strong><small>Corte, cor e tratamentos</small></span><i aria-hidden="true">→</i></a>
+        <a class="category-card category-nails" href="explorar.html?categoria=unhas"><span class="category-number">02</span><span><strong>Unhas</strong><small>Manicure, pedicure e nail art</small></span><i aria-hidden="true">→</i></a>
+        <a class="category-card category-brows" href="explorar.html?categoria=olhar"><span class="category-number">03</span><span><strong>Olhar</strong><small>Sobrancelhas e cílios</small></span><i aria-hidden="true">→</i></a>
+        <a class="category-card category-makeup" href="explorar.html?categoria=maquiagem"><span class="category-number">04</span><span><strong>Maquiagem</strong><small>Produções para cada ocasião</small></span><i aria-hidden="true">→</i></a>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
+      <div class="how-copy">
+        <p class="eyebrow">Simples do início ao fim</p>
+        <h2 id="how-title">Descubra. Escolha. Agende.</h2>
+        <p>Uma experiência pensada para você decidir com confiança e cuidar de si sem perder tempo em mensagens.</p>
+      </div>
+      <ol class="steps">
+        <li><span>01</span><div><strong>Encontre</strong><p>Busque por serviço, localização e horário disponível.</p></div></li>
+        <li><span>02</span><div><strong>Conheça</strong><p>Veja portfólio, equipe, preços e avaliações verificadas.</p></div></li>
+        <li><span>03</span><div><strong>Agende</strong><p>Escolha a profissional e confirme em poucos passos.</p></div></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html">
+      <span class="brand-symbol" aria-hidden="true">
+        <img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt="">
+        <img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt="">
+      </span>
+      <span class="brand-name">Beauty <strong>Hub</strong><small>Seu cuidado, no seu tempo.</small></span>
+    </a>
+    <div class="info-footer-links"><a href="termos.html">Termos</a><a href="privacidade.html">Privacidade</a><a href="suporte.html">Ajuda</a></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
