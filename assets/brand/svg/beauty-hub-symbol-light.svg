@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Monograma Beauty Hub</title>
+  <desc id="desc">Letras B e H entrelaçadas por uma mecha em movimento e uma joia champagne.</desc>
+  <defs>
+    <linearGradient id="pink" x1="24" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F52B82"/>
+      <stop offset=".48" stop-color="#D70B60"/>
+      <stop offset="1" stop-color="#A80745"/>
+    </linearGradient>
+    <linearGradient id="plum" x1="8" y1="12" x2="116" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54102F"/>
+      <stop offset="1" stop-color="#241019"/>
+    </linearGradient>
+    <linearGradient id="champagne" x1="49" y1="51" x2="68" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF0B2"/>
+      <stop offset=".48" stop-color="#F2C76A"/>
+      <stop offset="1" stop-color="#BA7927"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#plum)" d="M3 8h43v8H36v38h56V16H82V8h43v8h-10v96h10v8H82v-8h10V69H36v43h10v8H3v-8h10V16H3V8Z"/>
+  <path fill="url(#pink)" fill-rule="evenodd" d="M25 4h47c24 0 38 12 38 31 0 12-6 21-18 26 15 5 23 16 23 30 0 21-17 33-44 33H25v-9h11V13H25V4Zm34 17v31h12c12 0 19-5 19-16 0-10-7-15-19-15H59Zm0 48v38h14c14 0 22-6 22-19 0-12-8-19-22-19H59Z"/>
+  <path d="M7 76c25-2 38-17 51-17 20 0 44 11 56 27 9 12 8 25-2 34" fill="none" stroke="#68042E" stroke-opacity=".64" stroke-width="13" stroke-linecap="round"/>
+  <path d="M6 72c25-2 39-16 52-16 20 0 44 11 56 27 9 12 8 25-2 34" fill="none" stroke="url(#pink)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M58 49l3.7 7.3L69 60l-7.3 3.7L58 71l-3.7-7.3L47 60l7.3-3.7L58 49Z" fill="url(#champagne)"/>
+  <path d="M58 53v14M51 60h14" stroke="#FFF5CE" stroke-width="1.2" stroke-linecap="round" opacity=".82"/>
+</svg>
