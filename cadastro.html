@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Crie sua conta na Beauty Hub como cliente ou profissional de beleza.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Criar conta — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page" data-page="cadastro">
+  <main class="auth-shell auth-shell-register">
+    <section class="auth-form-panel" aria-labelledby="register-title">
+      <header class="auth-header">
+        <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial">
+          <span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span>
+          <span class="brand-name">Beauty <strong>Hub</strong><small>por The Gamers Tech</small></span>
+        </a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button>
+      </header>
+
+      <div class="auth-form-wrap auth-form-wrap-register">
+        <p class="eyebrow">Comece por aqui</p>
+        <h1 id="register-title">Uma conta. Do seu jeito.</h1>
+        <p class="auth-lead">Escolha como você quer usar a Beauty Hub. Essa decisão poderá ser ampliada depois.</p>
+
+        <div class="account-type" role="group" aria-label="Tipo de conta">
+          <button class="account-type-card is-selected" type="button" data-account-type="client" aria-pressed="true"><span>Cliente</span><small>Quero encontrar e agendar serviços.</small></button>
+          <button class="account-type-card" type="button" data-account-type="professional" aria-pressed="false"><span>Profissional</span><small>Quero divulgar e organizar meu negócio.</small></button>
+        </div>
+
+        <form class="auth-form auth-form-grid" data-auth-form>
+          <input type="hidden" name="accountType" value="client" data-account-type-input>
+          <label class="field field-full"><span>Nome completo</span><input type="text" name="name" autocomplete="name" placeholder="Como podemos chamar você?" required></label>
+          <label class="field"><span>E-mail</span><input type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required></label>
+          <label class="field"><span>Celular</span><input type="tel" name="phone" autocomplete="tel" placeholder="(00) 00000-0000" required></label>
+          <label class="field field-full">
+            <span>Crie uma senha</span>
+            <span class="password-field"><input type="password" name="password" autocomplete="new-password" placeholder="Mínimo de 8 caracteres" minlength="8" required><button type="button" data-password-toggle aria-label="Mostrar senha">Mostrar</button></span>
+          </label>
+          <label class="check-label field-full"><input type="checkbox" name="terms" required><span>Li e aceito os <a href="termos.html">Termos</a> e a <a href="privacidade.html">Política de Privacidade</a>.</span></label>
+          <button class="button button-primary button-block field-full" type="submit" data-register-label>Criar conta de cliente</button>
+          <p class="form-feedback field-full" data-form-feedback role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-switch">Já tem uma conta? <a href="login.html">Entrar</a></p>
+      </div>
+    </section>
+
+    <aside class="auth-visual-panel" aria-label="Experiência Beauty Hub para clientes e profissionais">
+      <img src="assets/images/beauty-auth-panel.webp" alt="Ambiente de beleza elegante sendo preparado para atendimento">
+      <div class="auth-visual-overlay"></div>
+      <div class="auth-visual-copy">
+        <span class="auth-visual-badge">Beauty Hub para todos os momentos</span>
+        <blockquote>“Conexões bonitas começam com confiança.”</blockquote>
+        <p>Clientes encontram. Profissionais crescem. A Beauty Hub organiza o caminho entre as duas.</p>
+      </div>
+      <div class="auth-proof-card"><span>✓</span><div><strong>Perfil pensado para você.</strong><small>Cliente, autônoma, estúdio ou salão.</small></div></div>
+    </aside>
+  </main>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
