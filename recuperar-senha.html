@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Recupere o acesso à sua conta Beauty Hub.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Recuperar acesso — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/beauty-experience.css">
+</head>
+<body class="auth-page" data-page="recover">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <main class="auth-shell" id="conteudo" tabindex="-1">
+    <section class="auth-form-panel" aria-labelledby="recover-title">
+      <header class="auth-header">
+        <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>Universo VIZU</small></span></a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button>
+      </header>
+      <div class="auth-form-wrap auth-form-wrap-compact">
+        <a class="back-link" href="login.html">← Voltar para entrar</a>
+        <p class="eyebrow">Recuperar acesso</p>
+        <h1 id="recover-title">Vamos ajudar você a voltar.</h1>
+        <p class="auth-lead">Informe o e-mail da sua conta. Enviaremos as instruções de recuperação com segurança.</p>
+        <form class="auth-form" data-auth-form>
+          <label class="field"><span>E-mail</span><input type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required></label>
+          <button class="button button-primary button-block" type="submit">Enviar instruções</button>
+          <p class="form-feedback" data-form-feedback role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+    <aside class="auth-visual-panel" aria-label="Cuidado e praticidade com a Beauty Hub">
+      <img src="assets/images/beauty-auth-panel.webp" alt="Espaço de beleza organizado e iluminado">
+      <div class="auth-visual-overlay"></div>
+      <div class="auth-visual-copy"><span class="auth-visual-badge">Acesso protegido</span><blockquote>“Seu cuidado continua de onde parou.”</blockquote><p>Recupere sua conta e volte aos seus agendamentos com tranquilidade.</p></div>
+    </aside>
+  </main>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script src="js/beauty-experience.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-26",
+  "environment": "local Chromium, external requests blocked",
+  "responsive_cases": 176,
+  "responsive_failures": 0,
+  "interaction_checks": 12,
+  "interaction_failures": 0,
+  "html_pages": 22,
+  "missing_local_references": 0,
+  "original_js_files_preserved": 10,
+  "production_backend_validated": false,
+  "published": false
+}

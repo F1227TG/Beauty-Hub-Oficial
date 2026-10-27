@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Entre na Beauty Hub para acompanhar seus agendamentos ou gerenciar seu espaço de beleza.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Entrar — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/beauty-experience.css">
+</head>
+<body class="auth-page" data-page="login">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <main class="auth-shell" id="conteudo" tabindex="-1">
+    <section class="auth-form-panel" aria-labelledby="login-title">
+      <header class="auth-header">
+        <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial">
+          <span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span>
+          <span class="brand-name">Beauty <strong>Hub</strong><small>Universo VIZU</small></span>
+        </a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button>
+      </header>
+
+      <div class="auth-form-wrap">
+        <p class="eyebrow">Bem-vinda de volta</p>
+        <h1 id="login-title">Entre para cuidar da sua rotina.</h1>
+        <p class="auth-lead">Acesse seus horários, favoritos e experiências — ou continue a gestão do seu espaço.</p>
+
+        <form class="auth-form" data-auth-form>
+          <label class="field">
+            <span>E-mail</span>
+            <input type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          </label>
+          <label class="field">
+            <span>Senha</span>
+            <span class="password-field">
+              <input type="password" name="password" autocomplete="current-password" placeholder="Digite sua senha" minlength="8" required>
+              <button type="button" data-password-toggle aria-label="Mostrar senha">Mostrar</button>
+            </span>
+          </label>
+
+          <div class="form-row">
+            <span class="form-note">Acesso protegido</span>
+            <a href="recuperar-senha.html">Esqueci minha senha</a>
+          </div>
+
+          <button class="button button-primary button-block" type="submit">Entrar na Beauty Hub</button>
+          <p class="form-feedback" data-form-feedback role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-switch">Ainda não tem conta? <a href="cadastro.html">Criar uma conta</a></p>
+        <p class="auth-legal">Ao continuar, você concorda com os <a href="termos.html">Termos</a> e a <a href="privacidade.html">Política de Privacidade</a>.</p>
+      </div>
+    </section>
+
+    <aside class="auth-visual-panel" aria-label="Experiência Beauty Hub">
+      <img src="assets/images/beauty-auth-panel.webp" alt="Profissional preparando um salão de beleza acolhedor">
+      <div class="auth-visual-overlay"></div>
+      <div class="auth-visual-copy">
+        <span class="auth-visual-badge">Seu cuidado, no seu tempo</span>
+        <blockquote>“Beleza também é ter tempo para você.”</blockquote>
+        <p>Descubra profissionais, escolha com confiança e agende sem complicação.</p>
+      </div>
+      <div class="auth-proof-card"><span>✦</span><div><strong>Mais leve para quem agenda.</strong><small>Mais organizado para quem atende.</small></div></div>
+    </aside>
+  </main>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script src="js/beauty-experience.js"></script>
+</body>
+</html>

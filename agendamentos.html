@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Acompanhe, reagende e consulte seu histórico de agendamentos na Beauty Hub."><meta name="theme-color" content="#fffaf8">
+  <title>Meus agendamentos — Beauty Hub</title><link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/customer-pages.css">
+  <link rel="stylesheet" href="css/beauty-experience.css">
+</head>
+<body class="account-page" data-page="appointments" data-require-role="customer">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="account-header">
+    <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>Universo VIZU</small></span></a>
+    <nav aria-label="Navegação da cliente"><a href="explorar.html">Explorar</a><a class="is-active" href="agendamentos.html">Agendamentos</a><a href="favoritos.html">Favoritos</a></nav>
+    <div><button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto"><span data-theme-icon aria-hidden="true">☾</span></button><button class="notification-button" type="button" aria-label="Notificações">♢<span>2</span></button><a class="account-avatar" href="minha-conta.html" aria-label="Conta de Marina">MC</a></div>
+  </header>
+  <main class="account-shell" id="conteudo" tabindex="-1">
+<p class="preview-notice">Prévia demonstrativa · Perfis, horários e indicadores ilustrativos.</p>
+    <aside class="account-sidebar">
+      <div class="account-profile"><span class="account-avatar account-avatar-large">MC</span><strong>Marina Costa</strong><small>Cliente Beauty Hub</small></div>
+      <nav aria-label="Menu da conta"><a href="minha-conta.html"><span>⌂</span>Visão geral</a><a class="is-active" aria-current="page" href="agendamentos.html"><span>▣</span>Agendamentos</a><a href="favoritos.html"><span>♡</span>Favoritos</a><a href="avaliacoes.html"><span>★</span>Avaliações</a><a href="configuracoes.html"><span>⚙</span>Configurações</a></nav>
+      <a class="account-help" href="suporte.html"><span>?</span><div><strong>Precisa de ajuda?</strong><small>Fale com o suporte</small></div></a>
+    </aside>
+    <section class="account-content">
+      <div class="customer-page-heading"><div><p class="eyebrow">Sua rotina de cuidado</p><h1>Meus agendamentos</h1><p>Acompanhe, reagende ou consulte seu histórico.</p></div><a class="button button-primary" href="explorar.html">Agendar novo serviço</a></div>
+      <div class="customer-tabs" role="tablist" aria-label="Filtrar agendamentos"><button class="customer-tab is-active" role="tab" aria-selected="true" data-appointment-tab="upcoming">Próximos</button><button class="customer-tab" role="tab" aria-selected="false" data-appointment-tab="history">Histórico</button><button class="customer-tab" role="tab" aria-selected="false" data-appointment-tab="cancelled">Cancelados</button></div>
+      <div class="customer-content-grid">
+        <div>
+          <section class="customer-panel appointment-list" data-appointment-panel="upcoming">
+            <article class="appointment-list-card" data-appointment-card data-appointment-status="confirmed"><span class="appointment-date-block"><strong>25</strong><small>AGO</small></span><div class="appointment-summary"><h2>Corte e finalização</h2><p>Studio Aurora • com Larissa Almeida</p><div><span class="customer-status status-confirmed">Confirmado</span><span class="customer-status status-completed">16:30 • 60 min • R$ 95</span></div></div><div class="customer-card-actions"><a class="button button-ghost" href="espaco.html">Ver detalhes</a><button class="customer-link-button" type="button" data-dialog-open="reschedule-dialog">Reagendar</button><button class="customer-link-button" type="button" data-dialog-open="cancel-dialog">Cancelar</button></div></article>
+            <article class="appointment-list-card" data-appointment-card data-appointment-status="pending"><span class="appointment-date-block"><strong>04</strong><small>SET</small></span><div class="appointment-summary"><h2>Manicure em gel</h2><p>Ateliê Nara • com Nina Santos</p><div><span class="customer-status status-pending">A confirmar</span><span class="customer-status status-completed">10:00 • 90 min • R$ 120</span></div></div><div class="customer-card-actions"><a class="button button-ghost" href="espaco.html">Ver detalhes</a><button class="customer-link-button" type="button" data-dialog-open="reschedule-dialog">Reagendar</button><button class="customer-link-button" type="button" data-dialog-open="cancel-dialog">Cancelar</button></div></article>
+          </section>
+          <section class="customer-panel appointment-list" data-appointment-panel="history" hidden>
+            <article class="appointment-list-card"><span class="appointment-date-block"><strong>12</strong><small>AGO</small></span><div class="appointment-summary"><h2>Design de sobrancelha</h2><p>Casa Lume • com Camila Freitas</p><div><span class="customer-status status-completed">Concluído</span><span class="customer-status status-completed">R$ 65</span></div></div><div class="customer-card-actions"><a class="button button-primary" href="avaliacoes.html">Avaliar</a><a class="customer-link-button" href="espaco.html?agendar=1">Agendar novamente</a></div></article>
+            <article class="appointment-list-card"><span class="appointment-date-block"><strong>28</strong><small>JUL</small></span><div class="appointment-summary"><h2>Tratamento para cachos</h2><p>Bela Trama • com Luiza Melo</p><div><span class="customer-status status-completed">Concluído</span><span class="customer-status status-confirmed">Avaliado 5 ★</span></div></div><div class="customer-card-actions"><a class="button button-ghost" href="espaco.html?agendar=1">Repetir serviço</a></div></article>
+          </section>
+          <section class="customer-panel appointment-list" data-appointment-panel="cancelled" hidden><article class="appointment-list-card"><span class="appointment-date-block"><strong>09</strong><small>JUL</small></span><div class="appointment-summary"><h2>Maquiagem social</h2><p>Essenza Beauty • cancelado em 07 de julho</p><div><span class="customer-status status-cancelled">Cancelado</span><span class="customer-status status-completed">Estorno concluído</span></div></div><div class="customer-card-actions"><a class="button button-ghost" href="explorar.html">Buscar outro horário</a></div></article></section>
+        </div>
+        <aside class="customer-side-stack"><section class="customer-side-card"><p class="eyebrow">Agosto</p><h2>2 momentos reservados</h2><p>Você tem <strong>150 minutos</strong> de cuidado programados.</p></section><section class="customer-side-card"><p class="eyebrow">Antes de ir</p><h2>Chegue 10 min antes</h2><p>Isso ajuda o espaço a confirmar preferências e começar no horário.</p></section><section class="customer-side-card"><p class="eyebrow">Precisa mudar?</p><h2>Cancelamento simples</h2><p>Consulte a política do espaço antes de cancelar ou reagendar.</p><a class="customer-link-button" href="suporte.html">Falar com o suporte →</a></section></aside>
+      </div>
+      <p class="account-feedback" data-customer-feedback role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <dialog class="customer-dialog" id="reschedule-dialog"><form method="dialog"><h2>Escolha um novo horário</h2><p>Horários disponíveis com Larissa no Studio Aurora.</p><div class="customer-page-actions"><button class="button button-ghost" type="button" data-reschedule-slot>26 ago. • 14:00</button><button class="button button-ghost" type="button" data-reschedule-slot>27 ago. • 16:30</button></div><div class="dialog-actions"><button class="button button-ghost" value="cancel" data-dialog-close>Voltar</button><button class="button button-primary" value="confirm">Confirmar troca</button></div></form></dialog>
+  <dialog class="customer-dialog" id="cancel-dialog"><form method="dialog"><h2>Cancelar este agendamento?</h2><p>A política do Studio Aurora permite cancelamento sem custo até 24 horas antes.</p><label>Motivo<select><option>Mudança de planos</option><option>Conflito de horário</option><option>Outro motivo</option></select></label><div class="dialog-actions"><button class="button button-ghost" value="cancel" data-dialog-close>Manter horário</button><button class="button button-primary" value="confirm">Confirmar cancelamento</button></div></form></dialog>
+  <script src="js/main.js"></script><script src="js/customer-pages.js"></script><script type="module" src="js/session-guard.js"></script>
+  <script src="js/beauty-experience.js"></script>
+</body></html>

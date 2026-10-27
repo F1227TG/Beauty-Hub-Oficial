@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Explore salões, estúdios e profissionais de beleza na Beauty Hub.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Explorar — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/beauty-experience.css">
+</head>
+<body data-page="explore">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>Universo VIZU</small></span></a>
+    <nav class="main-nav" aria-label="Navegação principal"><a href="index.html">Início</a><a class="is-active" href="explorar.html">Explorar</a><a href="index.html#como-funciona">Como funciona</a><a href="para-profissionais.html">Para profissionais</a></nav>
+    <div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button><a class="button button-ghost button-small" href="login.html">Entrar</a><a class="button button-primary button-small" href="cadastro.html">Criar conta</a></div>
+  </header>
+
+  <main class="explore-page" id="conteudo" tabindex="-1">
+<p class="preview-notice">Prévia demonstrativa · Perfis, horários e indicadores ilustrativos.</p>
+    <section class="explore-hero" aria-labelledby="explore-title">
+      <div>
+        <p class="eyebrow">Explore perto de você</p>
+        <h1 id="explore-title">Encontre o cuidado certo para hoje.</h1>
+        <p>Compare serviços, trabalhos e horários disponíveis em um só lugar.</p>
+      </div>
+      <form class="explore-search" data-explore-search>
+        <label><span>Serviço ou espaço</span><input name="query" type="search" placeholder="Ex.: manicure, corte, Studio Aurora"></label>
+        <label><span>Localização</span><input name="location" type="search" placeholder="São Paulo, SP"></label>
+        <button class="button button-primary" type="submit">Buscar</button>
+      </form>
+    </section>
+
+    <section class="explore-layout" aria-label="Resultados da busca">
+      <aside class="filters-panel">
+        <div class="filters-heading"><strong>Filtros</strong><button type="button" data-clear-filters>Limpar</button></div>
+        <fieldset>
+          <legend>Categoria</legend>
+          <label><input type="radio" name="category" value="all" checked><span>Todos</span><small>48</small></label>
+          <label><input type="radio" name="category" value="hair"><span>Cabelo</span><small>18</small></label>
+          <label><input type="radio" name="category" value="nails"><span>Unhas</span><small>14</small></label>
+          <label><input type="radio" name="category" value="brows"><span>Sobrancelhas e cílios</span><small>9</small></label>
+          <label><input type="radio" name="category" value="makeup"><span>Maquiagem</span><small>7</small></label>
+        </fieldset>
+        <fieldset>
+          <legend>Disponibilidade</legend>
+          <label><input type="checkbox" value="today" data-availability><span>Horário hoje</span></label>
+          <label><input type="checkbox" value="weekend"><span>Fim de semana</span></label>
+          <label><input type="checkbox" value="home"><span>Atende em domicílio</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>Faixa de preço</legend>
+          <div class="price-pills"><button type="button">$</button><button type="button">$$</button><button type="button">$$$</button></div>
+        </fieldset>
+        <fieldset>
+          <legend>Confiança</legend>
+          <label><input type="checkbox" value="verified"><span>Somente verificados</span></label>
+          <label><input type="checkbox" value="rating"><span>Nota 4,5 ou mais</span></label>
+        </fieldset>
+      </aside>
+
+      <div class="results-panel">
+        <div class="results-toolbar"><p><strong data-result-count>6 espaços</strong> encontrados</p><label>Ordenar por <select><option>Recomendados</option><option>Melhor avaliados</option><option>Mais próximos</option><option>Menor preço</option></select></label></div>
+        <div class="salon-grid" data-salon-grid>
+          <article class="salon-card" data-category="hair nails" data-name="studio aurora" data-slug="studio-aurora" data-location="pinheiros são paulo sp">
+            <a class="salon-photo salon-photo-one" href="espaco.html" aria-label="Ver Studio Aurora"><span class="salon-status">Aberto agora</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Studio Aurora aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Salão de beleza • Pinheiros</p><h2><a href="espaco.html">Studio Aurora</a></h2></div><span class="rating">4,9 <small>★</small></span></div><p class="salon-description">Cabelo, unhas e uma experiência acolhedora para sua rotina.</p><div class="salon-tags"><span>Coloração</span><span>Manicure</span><span>Escova</span></div><div class="salon-footer"><span>Próximo: <strong>Hoje, 16:30</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+          <article class="salon-card" data-category="brows makeup" data-name="casa lume" data-slug="casa-lume" data-location="vila madalena são paulo sp">
+            <a class="salon-photo salon-photo-two" href="espaco.html" aria-label="Ver Casa Lume"><span class="salon-status">Agenda hoje</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Casa Lume aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Estúdio • Vila Madalena</p><h2><a href="espaco.html">Casa Lume</a></h2></div><span class="rating">4,8 <small>★</small></span></div><p class="salon-description">Sobrancelhas, cílios e maquiagem com resultado natural.</p><div class="salon-tags"><span>Brows</span><span>Lash lifting</span><span>Make</span></div><div class="salon-footer"><span>Próximo: <strong>Hoje, 17:10</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+          <article class="salon-card" data-category="nails" data-name="atelie nara" data-slug="atelie-nara" data-location="jardins são paulo sp">
+            <a class="salon-photo salon-photo-three" href="espaco.html" aria-label="Ver Ateliê Nara"><span class="salon-status salon-status-soft">Amanhã</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Ateliê Nara aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Nail studio • Jardins</p><h2><a href="espaco.html">Ateliê Nara</a></h2></div><span class="rating">5,0 <small>★</small></span></div><p class="salon-description">Manicure, pedicure, alongamento e nail art autoral.</p><div class="salon-tags"><span>Gel</span><span>Nail art</span><span>Pedicure</span></div><div class="salon-footer"><span>Próximo: <strong>Amanhã, 09:00</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+          <article class="salon-card" data-category="hair" data-name="bela trama" data-slug="bela-trama" data-location="moema são paulo sp">
+            <a class="salon-photo salon-photo-four" href="espaco.html" aria-label="Ver Bela Trama"><span class="salon-status">Aberto agora</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Bela Trama aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Especialista em cachos • Moema</p><h2><a href="espaco.html">Bela Trama</a></h2></div><span class="rating">4,9 <small>★</small></span></div><p class="salon-description">Cuidado especializado para texturas, cachos e cabelos naturais.</p><div class="salon-tags"><span>Cachos</span><span>Tratamento</span><span>Corte</span></div><div class="salon-footer"><span>Próximo: <strong>Hoje, 18:00</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+          <article class="salon-card" data-category="makeup hair" data-name="essenza beauty" data-slug="essenza-beauty" data-location="tatuapé são paulo sp">
+            <a class="salon-photo salon-photo-five" href="espaco.html" aria-label="Ver Essenza Beauty"><span class="salon-status salon-status-soft">Sábado</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Essenza Beauty aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Beauty studio • Tatuapé</p><h2><a href="espaco.html">Essenza Beauty</a></h2></div><span class="rating">4,7 <small>★</small></span></div><p class="salon-description">Produção completa para eventos, ensaios e momentos especiais.</p><div class="salon-tags"><span>Maquiagem</span><span>Penteado</span><span>Noivas</span></div><div class="salon-footer"><span>Próximo: <strong>Sáb., 10:30</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+          <article class="salon-card" data-category="brows nails" data-name="bloom beauty bar" data-slug="bloom-beauty-bar" data-location="perdizes são paulo sp">
+            <a class="salon-photo salon-photo-six" href="espaco.html" aria-label="Ver Bloom Beauty Bar"><span class="salon-status">Agenda hoje</span><button class="favorite-button" type="button" data-favorite aria-label="Adicionar Bloom Beauty Bar aos favoritos">♡</button></a>
+            <div class="salon-card-body"><div class="salon-title-row"><div><p class="salon-type">Beauty bar • Perdizes</p><h2><a href="espaco.html">Bloom Beauty Bar</a></h2></div><span class="rating">4,8 <small>★</small></span></div><p class="salon-description">Serviços rápidos para unhas, sobrancelhas e cílios.</p><div class="salon-tags"><span>Express</span><span>Manicure</span><span>Sobrancelha</span></div><div class="salon-footer"><span>Próximo: <strong>Hoje, 15:50</strong></span><a href="espaco.html?agendar=1">Agendar →</a></div></div>
+          </article>
+        </div>
+        <p class="empty-results" data-empty-results hidden>Nenhum espaço corresponde aos filtros escolhidos.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>Seu cuidado, no seu tempo.</small></span></a><p>Uma plataforma de The Gamers Tech.</p></footer>
+  <script src="js/main.js"></script>
+  <script src="js/explore.js"></script>
+  <script src="js/beauty-experience.js"></script>
+</body>
+</html>

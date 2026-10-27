@@ -1,0 +1,12 @@
+{
+  "name": "beauty-hub-oficial",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "check:visual": "node tests/visual-audit.cjs",
+    "check:interactions": "node tests/interactions.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}

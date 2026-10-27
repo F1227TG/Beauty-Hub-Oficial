@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Acompanhe seus agendamentos e favoritos na Beauty Hub.">
+  <meta name="theme-color" content="#fffaf8">
+  <title>Minha conta — Beauty Hub</title>
+  <link rel="icon" href="assets/brand/svg/beauty-hub-symbol-light.svg" type="image/svg+xml">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('beauty-hub-theme')||'light'}catch(_){}</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/beauty-experience.css">
+</head>
+<body class="account-page" data-page="account" data-require-role="customer">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="account-header">
+    <a class="brand" href="index.html" aria-label="Beauty Hub, página inicial"><span class="brand-symbol" aria-hidden="true"><img class="brand-symbol-light" src="assets/brand/svg/beauty-hub-symbol-light.svg" alt=""><img class="brand-symbol-dark" src="assets/brand/svg/beauty-hub-symbol-dark.svg" alt=""></span><span class="brand-name">Beauty <strong>Hub</strong><small>Universo VIZU</small></span></a>
+    <nav aria-label="Navegação da cliente"><a href="explorar.html">Explorar</a><a href="agendamentos.html">Agendamentos</a><a href="favoritos.html">Favoritos</a></nav>
+    <div><button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema preto" title="Alternar tema"><span data-theme-icon aria-hidden="true">☾</span></button><button class="notification-button" type="button" aria-label="Notificações">♢<span>2</span></button><button class="account-avatar" type="button" aria-label="Conta de Marina">MC</button></div>
+  </header>
+
+  <main class="account-shell" id="conteudo" tabindex="-1">
+<p class="preview-notice">Prévia demonstrativa · Perfis, horários e indicadores ilustrativos.</p>
+    <aside class="account-sidebar">
+      <div class="account-profile"><span class="account-avatar account-avatar-large">MC</span><strong>Marina Costa</strong><small>Cliente Beauty Hub</small></div>
+      <nav aria-label="Menu da conta"><a class="is-active" aria-current="page" href="minha-conta.html"><span>⌂</span>Visão geral</a><a href="agendamentos.html"><span>▣</span>Agendamentos</a><a href="favoritos.html"><span>♡</span>Favoritos</a><a href="avaliacoes.html"><span>★</span>Avaliações</a><a href="configuracoes.html"><span>⚙</span>Configurações</a></nav>
+      <a class="account-help" href="suporte.html"><span>?</span><div><strong>Precisa de ajuda?</strong><small>Fale com o suporte</small></div></a>
+    </aside>
+
+    <section class="account-content" id="resumo">
+      <div class="account-welcome"><div><p class="eyebrow">Segunda-feira, 24 de agosto</p><h1>Olá, Marina.</h1><p>Seu próximo momento de cuidado está confirmado.</p></div><a class="button button-primary" href="explorar.html">Agendar novo serviço</a></div>
+
+      <section class="next-appointment" aria-labelledby="next-title">
+        <div class="next-appointment-image"><img src="assets/images/beauty-salon-cover.webp" alt="Studio Aurora"><span>Confirmado</span></div>
+        <div class="next-appointment-copy"><p class="eyebrow">Próximo agendamento</p><h2 id="next-title">Corte e finalização</h2><p class="appointment-place">Studio Aurora • com Larissa Almeida</p><div class="appointment-details"><span><small>Data</small><strong>Amanhã, 25 ago.</strong></span><span><small>Horário</small><strong>16:30</strong></span><span><small>Duração</small><strong>60 min</strong></span><span><small>Valor</small><strong>R$ 95</strong></span></div><div class="appointment-actions"><a class="button button-ghost button-small" href="espaco.html">Ver espaço</a><button class="button button-ghost button-small" type="button" data-demo-action>Reagendar</button><button class="text-danger" type="button" data-demo-action>Cancelar</button></div></div>
+      </section>
+
+      <div class="account-grid">
+        <section class="account-card account-schedule" id="agendamentos" aria-labelledby="schedule-title"><div class="account-card-heading"><div><p class="eyebrow">Sua rotina</p><h2 id="schedule-title">Próximos horários</h2></div><button type="button">Ver histórico →</button></div><article><span class="schedule-date"><strong>04</strong><small>SET</small></span><div><strong>Manicure</strong><p>Ateliê Nara • com Nina</p></div><span>10:00</span></article><article><span class="schedule-date"><strong>18</strong><small>SET</small></span><div><strong>Design de sobrancelha</strong><p>Casa Lume • com Camila</p></div><span>14:20</span></article></section>
+
+        <section class="account-card account-reminder" aria-labelledby="reminder-title"><span>✦</span><div><p class="eyebrow">Hora de voltar?</p><h2 id="reminder-title">Sua última manicure foi há 19 dias.</h2><p>O Ateliê Nara tem horários disponíveis nesta semana.</p><a href="espaco.html?agendar=1">Ver horários →</a></div></section>
+      </div>
+
+      <section class="favorites-section" id="favoritos" aria-labelledby="favorites-title"><div class="account-card-heading"><div><p class="eyebrow">Salvos por você</p><h2 id="favorites-title">Favoritos</h2></div><a href="favoritos.html">Ver todos →</a></div><div class="favorite-grid"><a href="espaco.html"><img src="assets/images/category-nails.webp" alt="Ateliê Nara"><span><strong>Ateliê Nara</strong><small>Unhas • Jardins</small></span><i>4,9 ★</i></a><a href="espaco.html"><img src="assets/images/category-brows.webp" alt="Casa Lume"><span><strong>Casa Lume</strong><small>Olhar • Vila Madalena</small></span><i>4,8 ★</i></a><a href="espaco.html"><img src="assets/images/category-hair.webp" alt="Bela Trama"><span><strong>Bela Trama</strong><small>Cachos • Moema</small></span><i>4,9 ★</i></a></div></section>
+      <p class="account-feedback" data-account-feedback role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/account.js"></script>
+  <script type="module" src="js/session-guard.js"></script>
+  <script src="js/beauty-experience.js"></script>
+</body>
+</html>
