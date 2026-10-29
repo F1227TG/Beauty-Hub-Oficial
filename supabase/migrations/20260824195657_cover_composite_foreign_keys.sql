@@ -1,0 +1,14 @@
+begin;
+create index appointment_items_appointment_space_idx on public.appointment_items (appointment_id, space_id);
+create index appointment_items_professional_space_idx on public.appointment_items (professional_member_id, space_id) where professional_member_id is not null;
+create index appointment_items_service_space_idx on public.appointment_items (service_id, space_id);
+create index appointments_professional_space_idx on public.appointments (professional_member_id, space_id) where professional_member_id is not null;
+create index availability_exceptions_member_space_idx on public.availability_exceptions (member_id, space_id) where member_id is not null;
+create index availability_rules_member_space_idx on public.availability_rules (member_id, space_id) where member_id is not null;
+create index member_services_member_space_idx on public.member_services (member_id, space_id);
+create index member_services_service_space_idx on public.member_services (service_id, space_id);
+create index portfolio_items_member_space_idx on public.portfolio_items (member_id, space_id) where member_id is not null;
+create index review_responses_author_space_idx on public.review_responses (author_member_id, space_id) where author_member_id is not null;
+create index review_responses_review_space_idx on public.review_responses (review_id, space_id);
+create index reviews_appointment_customer_space_idx on public.reviews (appointment_id, customer_id, space_id);
+commit;

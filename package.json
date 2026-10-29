@@ -1,12 +1,18 @@
 {
   "name": "beauty-hub-oficial",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
-    "check:visual": "node tests/visual-audit.cjs",
-    "check:interactions": "node tests/interactions.cjs"
+    "build": "node scripts/build.cjs",
+    "check:operations": "node tests/operations-browser.cjs",
+    "check:captcha": "node tests/auth-security-browser.cjs",
+    "check:database": "node --test tests/database/*.test.cjs",
+    "check:google": "node --test tests/google-login.test.cjs",
+    "check:visual": "node tests/operations-browser.cjs",
+    "check:interactions": "node tests/operations-browser.cjs"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.11",
     "@playwright/test": "1.64.1"
   }
 }

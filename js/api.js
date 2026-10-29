@@ -97,7 +97,7 @@ export const beautyHubApi = {
   status: getSupabaseStatus,
 
   auth: {
-    async signUp({ email, password, fullName, phone, accountType = 'customer' }) {
+    async signUp({ email, password, fullName, phone, accountType = 'customer', captchaToken }) {
       const client = await getSupabaseClient();
       const normalizedType = ['customer', 'professional', 'both'].includes(accountType)
         ? accountType
@@ -106,6 +106,8 @@ export const beautyHubApi = {
         email: String(email || '').trim().toLowerCase(),
         password,
         options: {
+          captchaToken,
+          emailRedirectTo: `${location.origin}/login.html?confirmado=1`,
           data: {
             full_name: String(fullName || '').trim(),
             phone_e164: normalizePhone(phone),
@@ -115,9 +117,10 @@ export const beautyHubApi = {
       }), 'Não foi possível criar a conta.');
     },
 
-    async signIn({ email, password }) {
+    async signIn({ email, password, captchaToken }) {
       const client = await getSupabaseClient();
       return unwrap(await client.auth.signInWithPassword({
+        options: { captchaToken },
         email: String(email || '').trim().toLowerCase(),
         password,
       }), 'E-mail ou senha inválidos.');
@@ -128,11 +131,11 @@ export const beautyHubApi = {
       return unwrap(await client.auth.signOut(), 'Não foi possível encerrar a sessão.');
     },
 
-    async resetPassword(email, redirectTo = `${location.origin}/login.html`) {
+    async resetPassword(email, redirectTo = `${location.origin}/login.html`, captchaToken) {
       const client = await getSupabaseClient();
       return unwrap(await client.auth.resetPasswordForEmail(
         String(email || '').trim().toLowerCase(),
-        { redirectTo },
+        { redirectTo, captchaToken },
       ), 'Não foi possível enviar o e-mail de recuperação.');
     },
 
