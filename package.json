@@ -14,8 +14,5 @@
   "devDependencies": {
     "@electric-sql/pglite": "0.5.11",
     "@playwright/test": "1.64.1"
-  },
-  "dependencies": {
-    "barber-hub-oficial": "file:../.."
   }
 }
