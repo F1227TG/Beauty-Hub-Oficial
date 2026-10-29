@@ -37,7 +37,7 @@ async function mount(page){
   for(const width of [390,1440]){
    const page=await browser.newPage({viewport:{width,height:900}}),errors=await mount(page);
    await page.goto('https://beauty.test/explorar.html');await expect(page.locator('#catalog')).toContainText('Espaço Teste');
-   await page.locator('[name=search]').fill('Não existe');await page.getByRole('button',{name:'Buscar',exact:true}).click();await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
+   await page.locator('[name=search]').fill('Não existe');await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
    await page.goto('https://beauty.test/espaco.html?id='+sid);await page.getByRole('button',{name:'Escolher horário',exact:true}).click();
    await page.locator('[name=day]').fill('2026-11-12');await page.getByRole('button',{name:'Consultar horários'}).click();await expect(page.locator('[name=start]')).not.toHaveValue('');
    await page.locator('[name=mode]').selectOption('home');await page.locator('[name=address]').fill('Rua Teste, 100, Recife');
@@ -46,7 +46,7 @@ async function mount(page){
    await page.goto('https://beauty.test/servicos-profissional.html');await expect(page.locator('[data-form=service]')).toBeVisible();await page.locator('[name=name]').fill('Novo serviço');await page.locator('[name=pricing_mode]').selectOption('quote');await page.getByRole('button',{name:'Cadastrar serviço',exact:true}).click();await expect(page.locator('#operation-feedback')).toContainText('Salvo');const save=await page.evaluate(()=>window.__calls.find(c=>c.name==='beauty_save_service'));expect(save.args.p_data.pricing_mode).toBe('quote');
    await page.goto('https://beauty.test/configuracoes.html');await page.getByRole('button',{name:'Aumentar texto'}).click();await expect(page.locator('html')).toHaveAttribute('data-large-text','true');
    await page.goto('https://beauty.test/cadastro.html');await page.locator('[name=name]').fill('Pessoa Teste');await page.locator('[name=email]').fill('synthetic@example.test');await page.locator('[name=phone]').fill('11999999999');await page.locator('[name=password]').fill('SyntheticExample123!');await page.locator('[name=terms]').check();await page.getByRole('button',{name:'Criar conta de cliente',exact:true}).click();await expect(page.locator('[data-form-feedback]')).toContainText('Confira seu e-mail');
-   expect(errors).toEqual([]);count+=7;await page.close();
+   await page.goto('https://beauty.test/painel.html');await page.getByRole('button',{name:'Pausar animações',exact:true}).click();await page.reload();await expect(page.getByRole('button',{name:'Ativar animações',exact:true})).toBeVisible();await page.getByRole('button',{name:'Ativar animações',exact:true}).click();await page.emulateMedia({reducedMotion:'reduce'});await expect(page.getByRole('button',{name:'Movimento reduzido pelo dispositivo'})).toBeDisabled();await page.emulateMedia({reducedMotion:'no-preference'});expect(errors).toEqual([]);count+=9;await page.close();
   }
   const files=fs.readdirSync(root).filter(f=>f.endsWith('.html'));
   const audit=[];
