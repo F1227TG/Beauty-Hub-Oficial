@@ -1,3 +1,4 @@
+import {exploreLayout,exploreCard} from './explore-presentation.js';
 import api from './api.js';
 import './operations-experience.js';
 import {getSupabaseClient} from './supabase-client.js';
@@ -31,10 +32,10 @@ async function businessContext(){
 async function render(){
  report('Carregando…');
  if(page==='explore'){
-  [spaces,categories]=await Promise.all([table('beauty_spaces',publicSpaceFields+',services(name,category_id)',{status:'published'},'name',100),table('categories','*',{is_active:true},'sort_order')]);
+  [spaces,categories]=await Promise.all([table('beauty_spaces',publicSpaceFields+',services(name,category_id,pricing_mode)',{status:'published'},'name',100),table('categories','*',{is_active:true},'sort_order')]);
   const categoryAlias={cabelo:'cabelos',olhar:'sobrancelhas'},slug=categoryAlias[query.get('categoria')]||query.get('categoria'),category=categories.find(c=>c.slug===slug)?.id||'';
-  root.innerHTML=`<form class="bh-filter" data-form="search"><input name="search" aria-label="Buscar por negócio ou serviço" placeholder="Negócio ou serviço" value="${e(query.get('query')||'')}"><input name="city" aria-label="Cidade ou região" placeholder="Cidade ou região" value="${e(query.get('location')||'')}"><select name="category" aria-label="Categoria"><option value="">Todas as categorias</option>${categories.map(c=>`<option value="${c.id}" ${c.id===category?'selected':''}>${e(c.name)}</option>`).join('')}</select><select name="mode" aria-label="Onde quer ser atendido"><option value="">Todas as modalidades</option><option value="onsite">No estabelecimento</option><option value="home">Na minha casa</option></select><button type="submit">Buscar</button></form><div class="bh-grid" id="catalog">${spaces.map(cardSpace).join('')||empty('Os primeiros negócios estão chegando.',link('Cadastrar meu negócio','negocio-profissional.html'))}</div>`;
-  if(query.has('query')||query.has('location')||category)filterCatalog(Object.fromEntries(new FormData(root.querySelector('form'))));
+  root.innerHTML=exploreLayout(categories,query,category);
+  filterCatalog(Object.fromEntries(new FormData(root.querySelector('form'))));
  }else if(page==='space'){await renderSpace();}
  else if(page.startsWith('pro-')){
   await businessContext();categories=await table('categories','*',{is_active:true},'sort_order');
@@ -88,7 +89,15 @@ function chooseService(id){const s=services.find(x=>x.id===id);if(!s)return;cons
  target.querySelectorAll('[name=member],[name=day]').forEach(el=>el.addEventListener('change',()=>{target.querySelector('[name=start]').innerHTML='<option value="">Consulte os horários novamente</option>';}));
 }
 function phone(v){const d=String(v||'').replace(/\D/g,'');return d?`+${d.startsWith('55')&&d.length>11?d:'55'+d}`:null;}
-function filterCatalog(data){const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const term=normalize(data.search),city=normalize(data.city);const found=spaces.filter(s=>(!term||normalize(`${s.name} ${s.description||''} ${(s.services||[]).map(x=>x.name).join(' ')}`).includes(term))&&(!city||normalize(`${s.city} ${s.service_area}`).includes(city))&&(!data.category||(s.services||[]).some(x=>x.category_id===data.category))&&(!data.mode||s.attendance_mode===data.mode||s.attendance_mode==='both'));document.querySelector('#catalog').innerHTML=found.map(cardSpace).join('')||empty('Nenhum resultado. Tente outra cidade ou modalidade.');return found.length;}
+function filterCatalog(data){
+ const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const term=normalize(data.search),city=normalize(data.city);
+ const found=spaces.filter(s=>(!term||normalize(`${s.name} ${s.description||''} ${(s.services||[]).map(x=>x.name).join(' ')}`).includes(term))&&(!city||normalize(`${s.city} ${s.service_area}`).includes(city))&&(!data.category||(s.services||[]).some(x=>x.category_id===data.category))&&(!data.mode||s.attendance_mode===data.mode||s.attendance_mode==='both')&&(!data.pricing||(s.services||[]).some(x=>x.pricing_mode===data.pricing))&&(!data.rating||(s.review_count>0&&s.rating>=4.5)));
+ found.sort(data.sort==='rating'?(a,b)=>Number(b.rating)-Number(a.rating):(a,b)=>a.name.localeCompare(b.name,'pt-BR'));
+ document.querySelector('#catalog').innerHTML=found.map(exploreCard).join('')||empty(spaces.length?'Nenhum resultado. Tente outra cidade ou modalidade.':'Os primeiros negócios estão chegando.',link('Cadastrar meu negócio','negocio-profissional.html'));
+ document.querySelector('#explore-count').textContent=`${found.length} ${found.length===1?'negócio encontrado':'negócios encontrados'}`;
+ return found.length;
+}
 async function requireAccount(){if(await session())return true;sessionStorage.setItem('beauty-return',location.pathname.split('/').pop()+location.search);location.assign('login.html');return false;}
 document.addEventListener('submit',async event=>{
  const f=event.target.closest('[data-form]');if(!f)return;event.preventDefault();if(!f.reportValidity())return;
