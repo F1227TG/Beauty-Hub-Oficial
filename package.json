@@ -1,6 +1,6 @@
 {
   "name": "beauty-hub-oficial",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "build": "node scripts/build.cjs",
@@ -8,6 +8,7 @@
     "check:captcha": "node tests/auth-security-browser.cjs",
     "check:database": "node --test tests/database/*.test.cjs",
     "check:google": "node --test tests/google-login.test.cjs",
+    "check:pricing": "node --test tests/explore-pricing.test.cjs",
     "check:visual": "node tests/operations-browser.cjs",
     "check:interactions": "node tests/operations-browser.cjs"
   },
