@@ -1,7 +1,6 @@
 import beautyHubApi from './api.js';
 
 const requiredRole = document.body.dataset.requireRole;
-const localPreview = ['127.0.0.1', 'localhost', '[::1]'].includes(location.hostname);
 
 const currentRoute = () => {
   const file = location.pathname.split('/').pop() || 'index.html';
@@ -36,12 +35,6 @@ const installSignOut = () => {
 };
 
 const guardSession = async () => {
-  if (localPreview) {
-    document.body.dataset.authPreview = 'local';
-    installSignOut();
-    return;
-  }
-
   try {
     const session = await beautyHubApi.auth.getSession();
     if (!session) {

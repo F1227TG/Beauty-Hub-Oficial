@@ -1,0 +1,8 @@
+.git
+.env*
+tests
+test-results
+supabase
+docs
+public
+node_modules
