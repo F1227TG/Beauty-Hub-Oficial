@@ -22,7 +22,7 @@ control.addEventListener('click', () => {
   apply();
 });
 preference.addEventListener('change', apply);
-document.querySelector('.bh-app > footer')?.append(control);
+document.querySelector('.bh-app > footer,body[data-operation="explore"] .site-footer')?.append(control);
 apply();
 
 const header = document.querySelector('.bh-app');
@@ -57,7 +57,7 @@ const observer = 'IntersectionObserver' in window ? new IntersectionObserver(ent
   }
 }, {threshold: .08}) : null;
 function enhance() {
-  document.querySelectorAll('.bh-card,.bh-empty,.bh-page-intro').forEach(element => {
+  document.querySelectorAll('.bh-card,.bh-empty,.bh-page-intro,.explore-hero,.ritual-card,.salon-card,.explore-editorial').forEach(element => {
     if (observed.has(element)) return;
     observed.add(element);
     observer?.observe(element);

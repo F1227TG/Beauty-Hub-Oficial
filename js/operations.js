@@ -1,4 +1,5 @@
 import {exploreLayout,exploreCard} from './explore-presentation.js';
+import {syncExplore} from './explore-life.js';
 import api from './api.js';
 import './operations-experience.js';
 import {getSupabaseClient} from './supabase-client.js';
@@ -96,6 +97,7 @@ function filterCatalog(data){
  found.sort(data.sort==='rating'?(a,b)=>Number(b.rating)-Number(a.rating):(a,b)=>a.name.localeCompare(b.name,'pt-BR'));
  document.querySelector('#catalog').innerHTML=found.map(exploreCard).join('')||empty(spaces.length?'Nenhum resultado. Tente outra cidade ou modalidade.':'Os primeiros negócios estão chegando.',link('Cadastrar meu negócio','negocio-profissional.html'));
  document.querySelector('#explore-count').textContent=`${found.length} ${found.length===1?'negócio encontrado':'negócios encontrados'}`;
+ syncExplore();
  return found.length;
 }
 async function requireAccount(){if(await session())return true;sessionStorage.setItem('beauty-return',location.pathname.split('/').pop()+location.search);location.assign('login.html');return false;}
