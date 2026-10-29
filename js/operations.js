@@ -1,4 +1,8 @@
+import {exploreLayout,exploreCard} from './explore-presentation.js';
+import {syncExplore} from './explore-life.js';
+import {withinPrice,lowestPrice} from './explore-pricing.js';
 import api from './api.js';
+import './operations-experience.js';
 import {getSupabaseClient} from './supabase-client.js';
 import {table,rpc,result,profile,session,saveProfile,publicSpaceFields} from './operations-api.js';
 const page=document.body.dataset.operation,root=document.querySelector('#operation'),feedback=document.querySelector('#operation-feedback');
@@ -14,6 +18,12 @@ const area=(name,label,value='')=>`<label class="bh-wide">${label}<textarea name
 const select=(name,label,options,value='')=>`<label>${label}<select name="${name}">${options.map(([v,t])=>`<option value="${e(v)}" ${v===value?'selected':''}>${e(t)}</option>`).join('')}</select></label>`;
 const form=(name,body,label='Salvar')=>`<form class="bh-form bh-card" data-form="${name}">${body}<div class="bh-wide"><button class="bh-primary" type="submit">${label}</button></div></form>`;
 let me=null,business=null,services=[],members=[],categories=[],appointments=[],quotes=[],spaces=[],acceptedQuote=null;
+let catalogOffset=0,catalogMore=false,catalogBusy=false;
+async function loadCatalogPage(){
+ const db=await getSupabaseClient();
+ const rows=await result(db.from('beauty_spaces').select(publicSpaceFields+',services(name,category_id,pricing_mode,price),space_members(display_name)').eq('status','published').order('name',{ascending:true}).order('id',{ascending:true}).range(catalogOffset,catalogOffset+23));
+ spaces.push(...rows);catalogOffset+=rows.length;catalogMore=rows.length===24;
+}
 function report(message,error=false){feedback.textContent=message;feedback.dataset.error=error;feedback.setAttribute('role',error?'alert':'status');}
 function cardSpace(s){return `<article class="bh-card"><span class="bh-badge">${labels[s.attendance_mode]||'No estabelecimento'}</span><h2>${e(s.name)}</h2><p>${e(s.city)} · ${e(s.state_code)}</p><p>${e(s.description||'Conheça os serviços e horários disponíveis.')}</p>${s.review_count?`<p>${Number(s.rating).toFixed(1)} / 5 · ${s.review_count} avaliações</p>`:'<p>Ainda sem avaliações</p>'}${link('Ver serviços',`espaco.html?id=${s.id}`)}</article>`;}
 async function businessContext(){
@@ -30,10 +40,11 @@ async function businessContext(){
 async function render(){
  report('Carregando…');
  if(page==='explore'){
-  [spaces,categories]=await Promise.all([table('beauty_spaces',publicSpaceFields+',services(name,category_id)',{status:'published'},'name',100),table('categories','*',{is_active:true},'sort_order')]);
+  spaces=[];catalogOffset=0;
+  const [,loadedCategories]=await Promise.all([loadCatalogPage(),table('categories','*',{is_active:true},'sort_order')]);categories=loadedCategories;
   const categoryAlias={cabelo:'cabelos',olhar:'sobrancelhas'},slug=categoryAlias[query.get('categoria')]||query.get('categoria'),category=categories.find(c=>c.slug===slug)?.id||'';
-  root.innerHTML=`<form class="bh-filter" data-form="search"><input name="search" aria-label="Buscar por negócio ou serviço" placeholder="Negócio ou serviço" value="${e(query.get('query')||'')}"><input name="city" aria-label="Cidade ou região" placeholder="Cidade ou região" value="${e(query.get('location')||'')}"><select name="category" aria-label="Categoria"><option value="">Todas as categorias</option>${categories.map(c=>`<option value="${c.id}" ${c.id===category?'selected':''}>${e(c.name)}</option>`).join('')}</select><select name="mode" aria-label="Onde quer ser atendido"><option value="">Todas as modalidades</option><option value="onsite">No estabelecimento</option><option value="home">Na minha casa</option></select><button type="submit">Buscar</button></form><div class="bh-grid" id="catalog">${spaces.map(cardSpace).join('')||empty('Os primeiros negócios estão chegando.',link('Cadastrar meu negócio','negocio-profissional.html'))}</div>`;
-  if(query.has('query')||query.has('location')||category)filterCatalog(Object.fromEntries(new FormData(root.querySelector('form'))));
+  root.innerHTML=exploreLayout(categories,query,category);
+  filterCatalog(Object.fromEntries(new FormData(root.querySelector('form'))));
  }else if(page==='space'){await renderSpace();}
  else if(page.startsWith('pro-')){
   await businessContext();categories=await table('categories','*',{is_active:true},'sort_order');
@@ -87,13 +98,32 @@ function chooseService(id){const s=services.find(x=>x.id===id);if(!s)return;cons
  target.querySelectorAll('[name=member],[name=day]').forEach(el=>el.addEventListener('change',()=>{target.querySelector('[name=start]').innerHTML='<option value="">Consulte os horários novamente</option>';}));
 }
 function phone(v){const d=String(v||'').replace(/\D/g,'');return d?`+${d.startsWith('55')&&d.length>11?d:'55'+d}`:null;}
-function filterCatalog(data){const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const term=normalize(data.search),city=normalize(data.city);const found=spaces.filter(s=>(!term||normalize(`${s.name} ${s.description||''} ${(s.services||[]).map(x=>x.name).join(' ')}`).includes(term))&&(!city||normalize(`${s.city} ${s.service_area}`).includes(city))&&(!data.category||(s.services||[]).some(x=>x.category_id===data.category))&&(!data.mode||s.attendance_mode===data.mode||s.attendance_mode==='both'));document.querySelector('#catalog').innerHTML=found.map(cardSpace).join('')||empty('Nenhum resultado. Tente outra cidade ou modalidade.');return found.length;}
+function filterCatalog(data){
+ const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const term=normalize(data.search),city=normalize(data.city);
+ const found=spaces.filter(s=>(!term||normalize(`${s.name} ${s.description||''} ${(s.services||[]).map(x=>x.name).join(' ')} ${(s.space_members||[]).map(x=>x.display_name).join(' ')}`).includes(term))&&(!city||normalize(`${s.city} ${s.service_area}`).includes(city))&&(!data.category||(s.services||[]).some(x=>x.category_id===data.category))&&(!data.mode||s.attendance_mode===data.mode||s.attendance_mode==='both')&&(!data.pricing||(s.services||[]).some(x=>x.pricing_mode===data.pricing))&&(!data.rating||(s.review_count>0&&s.rating>=4.5)));
+ const priced=found.filter(s=>withinPrice(s,data.min_price,data.max_price));found.splice(0,found.length,...priced);
+ found.sort(data.sort==='rating'?(a,b)=>Number(b.rating)-Number(a.rating):data.sort==='price'?(a,b)=>lowestPrice(a)-lowestPrice(b)||a.name.localeCompare(b.name,'pt-BR'):(a,b)=>a.name.localeCompare(b.name,'pt-BR'));
+ document.querySelector('#catalog').innerHTML=found.map(exploreCard).join('')||empty(spaces.length?'Nenhum resultado. Tente outra cidade ou modalidade.':'Os primeiros negócios estão chegando.',link('Cadastrar meu negócio','negocio-profissional.html'));
+ document.querySelector('#explore-count').textContent=`${found.length} ${found.length===1?'negócio encontrado':'negócios encontrados'}${catalogMore?' entre os negócios carregados. Carregue mais para ampliar a busca.':''}`;
+ document.querySelector('#explore-more').hidden=!catalogMore;
+ const chips=document.querySelector('#explore-active-filters');chips.replaceChildren();
+ const selections=[['search',data.search],['city',data.city],['category',categories.find(c=>c.id===data.category)?.name],['mode',labels[data.mode]],['pricing',data.pricing==='quote'?'Sob orçamento':data.pricing==='fixed'?'Preço definido':''],['rating',data.rating?'Nota 4,5 ou mais':''],['min_price',data.min_price!==''&&data.min_price!=null?'A partir de '+money(data.min_price):''],['max_price',data.max_price!==''&&data.max_price!=null?'Até '+money(data.max_price):'']];
+ for(const [key,value] of selections){if(!value)continue;const chip=document.createElement('button');chip.type='button';chip.textContent=value+' ×';chip.setAttribute('aria-label','Remover filtro '+value);chip.addEventListener('click',()=>{const f=root.querySelector('form');if(['category','mode','pricing'].includes(key))f.querySelector(`[name="${key}"][value=""]`).checked=true;else if(key==='rating')f.elements.rating.checked=false;else f.elements[key].value='';f.requestSubmit();});chips.append(chip);}
+ syncExplore();
+ return found.length;
+}
+document.addEventListener('click',async event=>{
+ if(event.target.id!=='explore-more'||catalogBusy)return;
+ catalogBusy=true;event.target.disabled=true;
+ try{await loadCatalogPage();filterCatalog(Object.fromEntries(new FormData(root.querySelector('form'))));report('Mais negócios carregados.');}catch(error){report(error.message||'Não foi possível carregar mais negócios. Tente novamente.',true);}finally{catalogBusy=false;event.target.disabled=false;}
+});
 async function requireAccount(){if(await session())return true;sessionStorage.setItem('beauty-return',location.pathname.split('/').pop()+location.search);location.assign('login.html');return false;}
 document.addEventListener('submit',async event=>{
  const f=event.target.closest('[data-form]');if(!f)return;event.preventDefault();if(!f.reportValidity())return;
  const data=Object.fromEntries(new FormData(f)),name=f.dataset.form,submit=f.querySelector('[type=submit]');submit.disabled=true;report('Salvando…');
  try{
-  if(name==='search'){report(`${filterCatalog(data)} negócios encontrados.`);return;}
+  if(name==='search'){if(data.min_price!==''&&data.max_price!==''&&data.min_price!=null&&data.max_price!=null&&Number(data.min_price)>Number(data.max_price))throw new Error('O preço mínimo não pode ser maior que o máximo.');report(`${filterCatalog(data)} negócios encontrados${catalogMore?' entre os dados carregados. Carregue mais para ampliar a busca':''}.`);return;}
   if(!await requireAccount())return;
   if(name==='business'){data.phone_e164=phone(data.phone_e164);const id=await rpc('beauty_save_business',{p_data:data,p_id:business?.id||null});query.set('negocio',id);history.replaceState(null,'',`${location.pathname}?${query}`);}
   if(name==='service')await rpc('beauty_save_service',{p_space:business.id,p_data:data,p_id:data.id||null});
@@ -122,7 +152,7 @@ document.addEventListener('click',async event=>{const el=event.target.closest('[
   if(['cancel','complete','absent','paid'].includes(action))await rpc('beauty_appointment_action',{p_id:id,p_action:{cancel:'cancelled',complete:'completed',absent:'no_show',paid:'paid'}[action]});
   if(action==='accept-quote'||action==='decline-quote')await rpc('beauty_quote_action',{p_id:id,p_action:action==='accept-quote'?'accept':'decline'});
   if(action==='remove-block')await result((await getSupabaseClient()).from('availability_exceptions').delete().eq('id',id).eq('space_id',business.id));
-  if(action==='favorite'||action==='unfavorite'){await api.favorites.set(id,action==='favorite');if(action==='favorite'){report('Negócio salvo nos favoritos.');return;}}
+  if(action==='favorite'||action==='unfavorite'||action==='catalog-favorite'){await api.favorites.set(id,action!=='unfavorite');if(action!=='unfavorite'){report('Negócio salvo nos favoritos.');if(action==='catalog-favorite'){el.textContent='♥';el.setAttribute('aria-label','Salvo nos favoritos');}return;}}
   if(action==='export'){const [bookings,favorites,requests]=await Promise.all([table('appointments','*',{customer_id:me.id},'starts_at',1000),api.favorites.list(),table('quote_requests','*',{customer_id:me.id},'created_at',1000)]);const url=URL.createObjectURL(new Blob([JSON.stringify({profile:me,appointments:bookings,favorites,quotes:requests},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='meus-dados-beauty-hub.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);report('Arquivo gerado com seu perfil e até 1.000 registros de cada histórico.');return;}
   await render();report('Alteração confirmada.');
  }catch(err){report(err.message||'Não foi possível concluir.',true);}finally{el.disabled=false;}

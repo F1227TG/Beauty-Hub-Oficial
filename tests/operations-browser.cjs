@@ -8,6 +8,7 @@ function sdk(){
  const me={id:uid,display_name:'Pessoa Teste',status:'active',city:'Recife',state_code:'PE'};
  const space={id:sid,owner_id:uid,name:'Espaço Teste',slug:'espaco-teste',status:'published',city:'Recife',state_code:'PE',kind:'independent',attendance_mode:'both',travel_fee:20,rating:0,review_count:0};
  const tables={profiles:[me],beauty_spaces:[space],categories:[{id:'70000000-0000-4000-8000-000000000007',name:'Cabelos',is_active:true}],services:[{id:service,space_id:sid,name:'Serviço Teste',duration_minutes:60,price:80,pricing_mode:'fixed',status:'active'},{id:'80000000-0000-4000-8000-000000000008',space_id:sid,name:'Serviço sob orçamento',duration_minutes:90,price:0,pricing_mode:'quote',status:'active'}],space_members:[{id:member,space_id:sid,display_name:'Profissional Teste',is_active:true,is_bookable:true}],appointments:[],quote_requests:[],favorites:[],reviews:[],availability_rules:[],availability_exceptions:[],user_roles:[{user_id:uid,role:'professional'}]};
+ space.services=tables.services;space.space_members=tables.space_members;
  globalThis.__calls=[];
  globalThis.__failRPC=false;
  const record=(name,args)=>{globalThis.__calls.push({name,args});};
@@ -37,7 +38,14 @@ async function mount(page){
   for(const width of [390,1440]){
    const page=await browser.newPage({viewport:{width,height:900}}),errors=await mount(page);
    await page.goto('https://beauty.test/explorar.html');await expect(page.locator('#catalog')).toContainText('Espaço Teste');
-   await page.locator('[name=search]').fill('Não existe');await page.getByRole('button',{name:'Buscar',exact:true}).click();await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
+   await page.locator('[data-ritual-search="Maquiagem"]').click();await expect(page.locator('[name=search]')).toHaveValue('Maquiagem');await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
+   if(width===390){await page.locator('[data-filter-toggle]').click();await expect(page.locator('#explore-filters')).toBeVisible();}
+   await page.getByRole('button',{name:'Limpar',exact:true}).click();await expect(page.locator('#catalog')).toContainText('Espaço Teste');
+   await page.locator('[name=max_price]').fill('50');await page.locator('[data-form=search]').evaluate(f=>f.requestSubmit());await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
+   if(width===390){await page.getByRole('button',{name:'Ver resultados',exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);}
+   await page.locator('#explore-active-filters button').click();await expect(page.locator('#catalog')).toContainText('Espaço Teste');
+   await page.locator('[data-action=catalog-favorite]').click();await expect(page.locator('#operation-feedback')).toContainText('favoritos');
+   await page.locator('[name=search]').fill('Não existe');await expect(page.locator('#catalog')).toContainText('Nenhum resultado');
    await page.goto('https://beauty.test/espaco.html?id='+sid);await page.getByRole('button',{name:'Escolher horário',exact:true}).click();
    await page.locator('[name=day]').fill('2026-11-12');await page.getByRole('button',{name:'Consultar horários'}).click();await expect(page.locator('[name=start]')).not.toHaveValue('');
    await page.locator('[name=mode]').selectOption('home');await page.locator('[name=address]').fill('Rua Teste, 100, Recife');
@@ -46,13 +54,14 @@ async function mount(page){
    await page.goto('https://beauty.test/servicos-profissional.html');await expect(page.locator('[data-form=service]')).toBeVisible();await page.locator('[name=name]').fill('Novo serviço');await page.locator('[name=pricing_mode]').selectOption('quote');await page.getByRole('button',{name:'Cadastrar serviço',exact:true}).click();await expect(page.locator('#operation-feedback')).toContainText('Salvo');const save=await page.evaluate(()=>window.__calls.find(c=>c.name==='beauty_save_service'));expect(save.args.p_data.pricing_mode).toBe('quote');
    await page.goto('https://beauty.test/configuracoes.html');await page.getByRole('button',{name:'Aumentar texto'}).click();await expect(page.locator('html')).toHaveAttribute('data-large-text','true');
    await page.goto('https://beauty.test/cadastro.html');await page.locator('[name=name]').fill('Pessoa Teste');await page.locator('[name=email]').fill('synthetic@example.test');await page.locator('[name=phone]').fill('11999999999');await page.locator('[name=password]').fill('SyntheticExample123!');await page.locator('[name=terms]').check();await page.getByRole('button',{name:'Criar conta de cliente',exact:true}).click();await expect(page.locator('[data-form-feedback]')).toContainText('Confira seu e-mail');
-   expect(errors).toEqual([]);count+=7;await page.close();
+   await page.goto('https://beauty.test/painel.html');if(width===390){await page.getByRole('button',{name:'Mais opções do negócio',exact:true}).click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.getByRole('dialog')).toBeHidden();}await page.getByRole('button',{name:'Pausar animações',exact:true}).click();await page.reload();await expect(page.getByRole('button',{name:'Ativar animações',exact:true})).toBeVisible();await page.getByRole('button',{name:'Ativar animações',exact:true}).click();await page.emulateMedia({reducedMotion:'reduce'});await expect(page.getByRole('button',{name:'Movimento reduzido pelo dispositivo'})).toBeDisabled();await page.emulateMedia({reducedMotion:'no-preference'});expect(errors).toEqual([]);count+=14;await page.close();
   }
   const files=fs.readdirSync(root).filter(f=>f.endsWith('.html'));
   const audit=[];
   for(const width of [320,390,768,1440])for(const theme of ['light','dark']){
    const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'}),errors=await mount(page);await page.addInitScript(t=>localStorage.setItem('beauty-hub-theme',t),theme);
-   for(const file of files){await page.goto('https://beauty.test/'+file+(file==='espaco.html'?'?id='+sid:''));if(await page.locator('#operation').count())await expect(page.locator('#operation-feedback')).not.toHaveText('Carregando…');await page.evaluate(()=>document.fonts.ready);
+   for(const file of files){await page.goto('https://beauty.test/'+file+(file==='espaco.html'?'?id='+sid:''));if(await page.locator('#operation').count())await expect(page.locator('#operation-feedback')).not.toHaveText('Carregando…');await page.evaluate(async()=>{await document.fonts.ready;await Promise.race([Promise.all([...document.images].map(img=>{img.loading='eager';return img.decode().catch(()=>{});})),new Promise(resolve=>setTimeout(resolve,1000))]);});
+    if(width<1024){await expect(page.locator('.beauty-app-dock')).toBeVisible();expect(await page.locator('.beauty-app-dock a').count()).toBeGreaterThanOrEqual(3);}
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);expect(overflow,`${file} ${width} ${theme}`).toBeLessThanOrEqual(1);audit.push({file,width,theme,overflow});
     if(theme==='light'&&[390,1440].includes(width)&&['painel.html','negocio-profissional.html','espaco.html','explorar.html'].includes(file))await page.screenshot({path:path.join(root,`test-results/operational-${file}-${width}.png`),fullPage:true});
    }expect(errors).toEqual([]);await page.close();

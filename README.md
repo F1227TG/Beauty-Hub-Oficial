@@ -8,6 +8,8 @@ Atendimento no espaço, em domicílio ou ambos, com cobertura e deslocamento. O 
 
 ## Arquitetura
 
+As áreas operacionais usam `css/operations-experience.css` e `js/operations-experience.js` para cabeçalhos, cartões, entrada suave ao rolar, busca instantânea e navegação mobile. Animações podem ser pausadas; a preferência fica salva e a redução de movimento do dispositivo tem prioridade. O conteúdo continua acessível sem animação.
+
 HTML/CSS e módulos JavaScript. `js/operations.js` e `js/operations-api.js` conectam a interface ao Supabase Auth, Data API, RLS e funções transacionais PostgreSQL. A API e as contas são independentes do Barber Hub. `api/public-config.js` expõe somente configuração pública do CAPTCHA.
 
 `supabase/migrations/` contém o histórico real; o bootstrap antigo está arquivado e não deve ser aplicado. `scripts/build.cjs` publica apenas HTML e recursos públicos.
